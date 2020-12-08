@@ -13,22 +13,32 @@ export default function Signup(){
   function handleName(event){
     name = event.target.value;
     setName(name);
+    error="";
+    setError(error);
   }
   function handleEmail(event){
     email = event.target.value;
     setEmail(email);
+    error="";
+    setError(error);
   }
   function handleGender(event){
     gender = event.target.value;
     setGender(gender);
+    error="";
+    setError(error);
   }
   function handlePhoneNumber(event){
     phoneNumber = event.target.value;
     setPhonenumber(phoneNumber);
+    error="";
+    setError(error);
   }
   function handlePassword(event){
     password = event.target.value;
     setPassword(password);
+    error="";
+    setError(error);
   }
 
   function handleSubmit(){

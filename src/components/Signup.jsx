@@ -15,82 +15,105 @@ export default function Signup(){
     setName(name);
     error="";
     setError(error);
+    //return false;
   }
   function handleEmail(event){
     email = event.target.value;
     setEmail(email);
     error="";
     setError(error);
+    //return false;
   }
   function handleGender(event){
     gender = event.target.value;
     setGender(gender);
     error="";
     setError(error);
+    //return false;
   }
   function handlePhoneNumber(event){
     phoneNumber = event.target.value;
     setPhonenumber(phoneNumber);
     error="";
     setError(error);
+    //return false;
   }
   function handlePassword(event){
     password = event.target.value;
     setPassword(password);
     error="";
     setError(error);
+    
   }
 
-  function handleSubmit(){
+  function validateInputs(){
     const alphanumeric = /^[0-9a-zA-Z ]+$/;
     const numbers = /^\d+$/;
     
     if(name === "" || email === "" || gender === "" || phoneNumber === "" || password === "" ){
       error = "All fields are mandatory";
       setError(error);
-      return;
+      return false;
     }
     if(!(name.match(alphanumeric))){
       error = "Name is not alphanumeric";
       setError(error);
-      return;
+      return false;
     }
     if(! email.includes("@")){
       
       error = "Email must contain @";
       setError(error);
-      return;
+      return false;
     }
     if(! (gender==="Male"|| gender === "Female" || gender === "Other")){
       error = "Please identify as male, female or others";
       setError(error);
       
-      return;
+      return false;
     }
     if(!phoneNumber.match(numbers)){
       error = "Phone Number must contain only numbers";
       setError(error);
-      return;
+      return false;
 
     }
     if(password.length < 6){
       error = "Password must contain atleast 6 letters";
       setError(error);
-      return;
+      return false;
 
     }
+    setError("");
+    return true;
     
-    let i = email.indexOf("@");
-    let userName = email.slice(0,i);
-    welcome = `Hello ${userName}`;
-    console.log(userName);
-    setWelcome(welcome);
-    console.log(`Hello ${userName}`);
+    // let i = email.indexOf("@");
+    // let userName = email.slice(0,i);
+    // welcome = `Hello ${userName}`;
+    // console.log(userName);
+    // setWelcome(welcome);
+    // console.log(`Hello ${userName}`);
   }
+
+  const sayHello = () => {
+    let userName = "";
+    for (let i = 0; email[i] !== "@"; i++) {
+      userName += email[i];
+    }
+    setWelcome("Hello " + userName);
+    return;
+  };
+  const handleSubmit = () => {
+    //setWelcome("");
+    if (!validateInputs()) {
+      return;
+    }
+    sayHello();
+  };
 
   return(
     <>
-    
+    <h1>{welcome}</h1>
     <input name="name" data-testId="name" placeholder="Name" value={name} type="text" onChange={handleName}/>
     <input name="email" data-testId="email" placeholder="Email Address" value={email} type="text" onChange={handleEmail}/>
     <input name="gender" data-testId="gender" placeholder="Gender" type="text" value={gender} onChange={handleGender}/>
